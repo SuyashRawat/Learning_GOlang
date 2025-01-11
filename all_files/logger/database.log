@@ -1,0 +1,1 @@
+Register Error2025/01/10 17:09:00 Could not gyeee registration:  failed to connect to `host=localhost user=postgres database=taskmanage`: failed SASL auth (FATAL: password authentication failed for user "postgres" (SQLSTATE 28P01))

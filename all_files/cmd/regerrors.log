@@ -1,0 +1,10 @@
+Register Error2025/01/10 13:21:48 Could not complete registeration:  user already exists
+Register Error2025/01/10 13:23:28 Could not complete registeration:  user already exists
+Register Error2025/01/10 13:25:29 Could not complete registeration:  user already exists
+Register Error2025/01/10 13:26:50 Could not complete registeration:  user already exists
+Register Error2025/01/10 13:27:50 Could not complete registeration:  user already exists
+Register Error2025/01/10 13:29:53 Could not complete registeration:  user already exists
+Register Error2025/01/10 13:33:15 Could not complete registration:  user already exists
+Register Error: 2025/01/10 13:38:28 auth.go:34: Starting registration process
+Register Error: 2025/01/10 13:38:28 auth.go:46: Received user data: {Id:0 Username:suy Email:rawh78@gmail.com PhoneNo:+9198455457 PasswordHash:psword123 CreatedAt:}
+Register Error: 2025/01/10 13:38:28 auth.go:73: Error creating user: user already exists
