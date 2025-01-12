@@ -19,12 +19,7 @@ import (
 // Register handler
 func Register(c *gin.Context) {
 
-	// defer func() {
-	// 	if r := recover(); r != nil {
-	// 		log.Printf("Recovered from panic: %v", r)
-	// 		Regerror.Println("Recovered from panic:", r)
-	// 	}
-	// }()
+	
 
 	var user models.User
 

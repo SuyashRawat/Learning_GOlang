@@ -7,13 +7,13 @@ import (
 
 	"github.com/joho/godotenv"
 )
-type Config struct{
+
+type Config struct {
 	Postgresdsn string
-	Redisaddr string
-
-
+	Redisaddr   string
 }
-func Loadconfig() Config{
+
+func Loadconfig() Config {
 	err := godotenv.Load()
 	if err != nil {
 		log.Println("Warning: No .env file found")
@@ -21,6 +21,6 @@ func Loadconfig() Config{
 
 	return Config{
 		Postgresdsn: os.Getenv("POSTGRES_DSN"),
-		Redisaddr: os.Getenv("REDIS_ADDR"),
+		Redisaddr:   os.Getenv("REDIS_ADDR"),
 	}
 }

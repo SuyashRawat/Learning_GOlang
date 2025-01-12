@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat</title>
+    <style>
+        input, textarea {
+            display: block;
+            margin-bottom: 10px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            margin-bottom: 5px;
+            padding: 5px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <ul id="messages"></ul>
+    <form id="chatbox">
+        <textarea placeholder="Type your message..."></textarea>
+        <input type="submit" value="Send" />
+    </form>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+        $(function() {
+            var socket = null;
+            var msgBox = $("#chatbox textarea");
+            var messages = $("#messages");
+
+            $("#chatbox").submit(function() {
+                if (!msgBox.val()) return false;
+                if (!socket || socket.readyState !== WebSocket.OPEN) {
+                    alert("Error: No WebSocket connection.");
+                    return false;
+                }
+                socket.send(msgBox.val());
+                msgBox.val("");
+                return false;
+            });
+
+            if (!window["WebSocket"]) {
+                alert("Error: Your browser does not support WebSockets.");
+            } else {
+                var socketURL = (window.location.protocol === "https:" ? "wss://" : "ws://") + window.location.host + "/room";
+                socket = new WebSocket(socketURL);
+
+                socket.onopen = function() {
+                    alert("WebSocket connection established.");
+                };
+
+                socket.onclose = function() {
+                    alert("Connection has been closed.");
+                };
+
+                socket.onerror = function(error) {
+                    console.error("WebSocket Error:", error);
+                    alert("An error occurred with the WebSocket connection.");
+                };
+
+                socket.onmessage = function(e) {
+                    const escapedData = $("<div>").text(e.data).html();
+                    messages.append($("<li>").html(escapedData));
+                };
+            }
+        });
+    </script>
+</body>
+</html>

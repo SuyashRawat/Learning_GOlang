@@ -20,7 +20,6 @@ func ConnectPostgres(dsn string) *gorm.DB {
 		logger.Ok.Println("Could not gyeee registration: ", err.Error())
 		log.Fatal("Error connecting to database")
 
-
 	}
 	sqlDB, err := db.DB()
 	if err != nil {

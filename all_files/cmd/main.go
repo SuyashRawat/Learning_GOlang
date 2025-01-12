@@ -8,6 +8,7 @@ import (
 	"log"
 	"taskmanage/consumers"
 	"taskmanage/db"
+
 	// "taskmanage/logger"
 
 	// "taskmanage/handlers"
@@ -32,10 +33,9 @@ import (
 
 // var ctx string=context.Background()
 
+func main() {
 
-func main(){
-	
-	cfg:=config.Loadconfig()
+	cfg := config.Loadconfig()
 	// logger.Ok,_=logger.GetLogger("Service1")
 	// handlers.Setok(ok)
 	// ctx:=context.Background()
@@ -43,30 +43,26 @@ func main(){
 
 	postconnection := db.ConnectPostgres(cfg.Postgresdsn)
 
-// Retrieve the underlying sql.DB object
-sqlDB, err := postconnection.DB()
-if err != nil {
-    log.Fatalf("Failed to get sql.DB: %v", err)
-}
-// Ping the database
-if err := sqlDB.Ping(); err != nil {
-    log.Fatalf("Database connection failed: %v", err)
-} else {
-    log.Println("Database connection successful")
-}
-models.SetDB(postconnection)
+	// Retrieve the underlying sql.DB object
+	sqlDB, err := postconnection.DB()
+	if err != nil {
+		log.Fatalf("Failed to get sql.DB: %v", err)
+	}
+	// Ping the database
+	if err := sqlDB.Ping(); err != nil {
+		log.Fatalf("Database connection failed: %v", err)
+	} else {
+		log.Println("Database connection successful")
+	}
+	models.SetDB(postconnection)
 
-go consumers.StartEmailConsumer()
+	go consumers.StartEmailConsumer()
 
-	  // Add this line
-	  router := gin.Default()
+	// Add this line
+	router := gin.Default()
 	routes.SetupRoutes(router)
-	
-	port := ":8080" 
+
+	port := ":8080"
 	router.Run(port)
-	
-
-
 
 }
-
