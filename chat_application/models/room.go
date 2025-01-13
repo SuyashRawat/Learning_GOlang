@@ -1,17 +1,20 @@
 package models
 
 import (
+	"chat_application/trace"
 	"fmt"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 )
-type Room struct{
-	join chan *Client
-	leave chan *Client
-	clients map[*Client]bool
+
+type Room struct {
+	join        chan *Client
+	leave       chan *Client
+	clients     map[*Client]bool
 	forwardchan chan []byte
 
+	Tracer trace.Tracer
 }
 
 func NewRoom() *Room {
@@ -39,19 +42,24 @@ func (r *Room) Run() {
 		case client := <-r.join:
 			fmt.Println("welcome client")
 			r.clients[client] = true
+			r.Tracer.Trace("New client joined")
+
 		case client := <-r.leave:
 			fmt.Println("client left")
 			delete(r.clients, client)
 			close(client.sendchan)
+			r.Tracer.Trace("Client left")
 		case msg := <-r.forwardchan:
 			fmt.Println("forwarding the message")
 			for client := range r.clients {
 				select {
 				case client.sendchan <- msg:
 					fmt.Println("sent to client")
+					r.Tracer.Trace(" -- sent to client")
 				default:
 					delete(r.clients, client)
 					close(client.sendchan)
+					r.Tracer.Trace(" -- failed to send, cleaned up client")
 				}
 			}
 		}
