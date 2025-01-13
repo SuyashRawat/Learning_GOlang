@@ -10,7 +10,7 @@ import (
 
 func main() {
 	// Backend server URLs to forward requests
-	targetURL1 := "http://httpbin.org"
+	targetURL1 := "https://httpbin.org"
 	targetURL2 := "https://postman-echo.com"
 
 	// Parse backend URLs
@@ -28,7 +28,7 @@ func main() {
 	proxy2 := httputil.NewSingleHostReverseProxy(backendURL2)
 
 	// Handler for "/some-path1"
-	http.HandleFunc("/some-path1", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/somepath1", func(w http.ResponseWriter, r *http.Request) {
 		log.Println("Incoming request for:", r.URL.Path)
 		r.URL.Path = "/" // Modify the path before forwarding (optional)
 		proxy1.ServeHTTP(w, r)
