@@ -51,5 +51,5 @@ func main() {
 		}
 	}
 
-	<-exitChan
+	<-exitChan // Wait for the exit signal before closing the client
 }
