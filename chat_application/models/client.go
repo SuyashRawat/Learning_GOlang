@@ -18,12 +18,6 @@ type Client struct {
 //now i need to forward this message to forwardchan of room in order for the room to broadcast it to all clients
 //so we first need to readthe message from the socket and then send to forward channel
 
-<<<<<<< HEAD
-// so in this read method message is received by the websocket server and is passed to the forwardchan
-
-// from forwardchan message is send to each clients sendchan
-=======
->>>>>>> 1f07827734644fd605fe5b3740ab0d4a63861888
 func (c *Client) Read() {
 
 	for {
@@ -33,48 +27,12 @@ func (c *Client) Read() {
 			break
 		}
 
-<<<<<<< HEAD
-		c.room.forwardchan <- msg
-=======
 		c.room.forward <- msg
->>>>>>> 1f07827734644fd605fe5b3740ab0d4a63861888
 
 	}
 	c.clientsocket.Close()
 
 }
-<<<<<<< HEAD
-
-// func (c *Client) Read() {
-// 	defer func() {
-// 		c.room.leave <- c
-// 		c.clientsocket.Close()
-// 	}()
-
-// 	for {
-// 		_, msg, err := c.clientsocket.ReadMessage()
-// 		if err != nil {
-// 			fmt.Println("Failed to retrieve message:", err)
-// 			break
-// 		}
-// 		c.room.forwardchan <- msg
-// 	}
-// }
-
-// func(c *Client)Write(){
-
-// 	for msg:=range c.sendchan{
-// 		if err:=c.clientsocket.WriteMessage(websocket.TextMessage,msg);err!=nil{
-// 			break
-// 		}
-// 		c.clientsocket.Close()
-// 	}
-// }
-
-// write method reads from each clients sendchan and the msg is being displayed then
-=======
-
->>>>>>> 1f07827734644fd605fe5b3740ab0d4a63861888
 func (c *Client) Write() {
 	defer c.clientsocket.Close()
 

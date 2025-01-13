@@ -7,15 +7,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 )
-<<<<<<< HEAD
-
-type Room struct {
-	join        chan *Client
-	leave       chan *Client
-	clients     map[*Client]bool
-	forwardchan chan []byte
-
-=======
 
 type Room struct {
 	// forward is a channel that holds incoming messages
@@ -29,7 +20,6 @@ type Room struct {
 	clients map[*Client]bool
 	// tracer will receive trace information of activity
 	// in the room.
->>>>>>> 1f07827734644fd605fe5b3740ab0d4a63861888
 	Tracer trace.Tracer
 }
 
@@ -64,12 +54,7 @@ func (r *Room) Run() {
 			fmt.Println("client left")
 			delete(r.clients, client)
 			close(client.sendchan)
-<<<<<<< HEAD
-			r.Tracer.Trace("Client left")
-		case msg := <-r.forwardchan:
-=======
 		case msg := <-r.forward:
->>>>>>> 1f07827734644fd605fe5b3740ab0d4a63861888
 			fmt.Println("forwarding the message")
 			for client := range r.clients {
 				select {

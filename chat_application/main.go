@@ -3,11 +3,6 @@ package main
 import (
 	"chat_application/models"
 	"chat_application/trace"
-<<<<<<< HEAD
-	"os"
-	// "chat_application/rooms"
-=======
->>>>>>> 1f07827734644fd605fe5b3740ab0d4a63861888
 	"log"
 	"os"
 
