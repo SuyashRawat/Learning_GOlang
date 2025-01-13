@@ -3,9 +3,13 @@ package main
 import (
 	"chat_application/models"
 	"chat_application/trace"
+<<<<<<< HEAD
 	"os"
 	// "chat_application/rooms"
+=======
+>>>>>>> 1f07827734644fd605fe5b3740ab0d4a63861888
 	"log"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
@@ -21,7 +25,7 @@ func main() {
 		r.ServeNewRoom(ctx)
 	})
 	go r.Run()
-	if err := router.Run(":8080"); err != nil {
+	if err := router.Run(":8070"); err != nil {
 		log.Fatal("Gin server failed to start:", err)
 	}
 
