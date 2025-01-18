@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"log"
@@ -66,7 +67,7 @@ func getUserInfo(state string, code string) ([]byte, error) {
 		return nil, fmt.Errorf("invalid oauth state")
 	}
 
-	token, err := googleOauthConfig.Exchange(oauth2.NoContext, code) //exchanges the code for an access token
+	token, err := googleOauthConfig.Exchange(context.Background(), code) //exchanges the code for an access token
 	if err != nil {
 		return nil, fmt.Errorf("code exchange failed: %s", err.Error())
 	}
